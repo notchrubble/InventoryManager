@@ -53,6 +53,17 @@ public class UserAccount {
 		
 	}
 	
+	public void deleteAccount(String username) throws IOException {
+		if(loginInfo.containsKey(username)) {
+			loginInfo.remove(username);
+			saveAccounts();
+			JOptionPane.showMessageDialog(null, "Account deleted successfully.");
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Username does not exist!");
+		}
+	}
+	
 	public void saveAccounts() throws IOException {
 		try (PrintWriter writer = new PrintWriter (new FileWriter(accountFile))) {
 			for (HashMap.Entry <String, String> entry : loginInfo.entrySet()) {

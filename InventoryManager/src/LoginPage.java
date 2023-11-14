@@ -105,8 +105,7 @@ public class LoginPage implements ActionListener{
 					
 					//frame.dispose();
 					if(username.equals(adminUsername)) {
-						messageLabel.setForeground(Color.orange);
-						messageLabel.setText("Welcome to admin page!");
+						frame.dispose();
 						//go to Admin page
 						try {
 							new AdminPage();
@@ -123,7 +122,7 @@ public class LoginPage implements ActionListener{
 				}
 				else {
 					messageLabel.setForeground(Color.red);
-					messageLabel.setText("Invalid password!");
+					messageLabel.setText("Invalid username or password!");
 				}
 			}
 			else {

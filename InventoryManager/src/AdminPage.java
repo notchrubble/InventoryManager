@@ -4,8 +4,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.HashMap;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,6 +27,7 @@ public class AdminPage implements ActionListener {
 	JButton register = new JButton("Register");
 	JButton clear = new JButton("Clear");
 	JButton	gotoInventory = new JButton("Go to Inventory");
+	JButton deleteAccount = new JButton("Delete account");
 	
 	private UserAccount account;
 	
@@ -49,6 +48,11 @@ public class AdminPage implements ActionListener {
 		clear.setFocusable(false);
 		clear.addActionListener(this);
 		
+		deleteAccount.setBounds(350, 100, 150, 25);
+		deleteAccount.setFocusable(false);
+		deleteAccount.addActionListener(this);
+		
+		
 		gotoInventory.setBounds(470, 350, 150, 25);
 		gotoInventory.setFocusable(false);
 		gotoInventory.addActionListener(this);
@@ -62,6 +66,7 @@ public class AdminPage implements ActionListener {
 		frame.add(passwordText);
 		frame.add(register);
 		frame.add(clear);
+		frame.add(deleteAccount);
 		frame.add(message);
 		frame.add(gotoInventory);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -106,6 +111,22 @@ public class AdminPage implements ActionListener {
 		if(e.getSource() == gotoInventory) {
 			frame.dispose();
 			new Inventory();
+		}
+		
+		if(e.getSource() == deleteAccount) {
+			String username = userNameText.getText();
+			if(username.equals("Admin")) {
+				message.setForeground(Color.red);
+				message.setText("Cannot delete Admin");
+			}
+			else {
+				try {
+					account.deleteAccount(username);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+			}
+}
 		}
 		
 	}
