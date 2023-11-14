@@ -3,12 +3,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.HashMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class AdminPage implements ActionListener {
@@ -19,8 +21,8 @@ public class AdminPage implements ActionListener {
 	JLabel password = new JLabel("New Password");
 	
 	JTextField userNameText = new JTextField();
-	//change to Password field
-	JTextField passwordText = new JTextField();//have a toggle to show password
+	/////////////////////
+	JPasswordField passwordText = new JPasswordField();//have a toggle to show password
 	
 	JLabel message = new JLabel();
 	
@@ -28,9 +30,11 @@ public class AdminPage implements ActionListener {
 	JButton clear = new JButton("Clear");
 	JButton	gotoInventory = new JButton("Go to Inventory");
 	
-	//HashMap <String, String> loginInfo = new HashMap <String, String>();
+	private UserAccount account;
 	
-	AdminPage (){
+	public AdminPage () throws IOException{
+		account = new UserAccount("userAccounts.txt");
+		
 		userName.setBounds(50, 100, 100, 25);
 		password.setBounds(50, 150, 100, 25);
 		
@@ -67,7 +71,7 @@ public class AdminPage implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		// TODO Auto-generated method stub
 		if(e.getSource() == clear) {
 			userNameText.setText("");
@@ -77,21 +81,27 @@ public class AdminPage implements ActionListener {
 		
 		if(e.getSource() == register) {
 			String username = userNameText.getText();
-			String pwd = passwordText.getText();
+			String pwd = String.valueOf(passwordText.getPassword());
 			
 			if(username.isEmpty() || pwd.isEmpty()) {
 				message.setForeground(Color.red);
 				message.setText("Missing username or password");
 			}
-//			else {
-//				UserAccount user = new UserAccount(username, pwd);
-//				message.setForeground(Color.orange);
-//				message.setText("User account added successfully!");
-//				userNameText.setText("");
-//				passwordText.setText("");
-//				user.printAccount();
-//			}
-//			
+			else {
+				try {
+					account.registerAccount(username, pwd);
+					message.setForeground(Color.orange);
+					message.setText("User account added successfully!");
+					userNameText.setText("");
+					passwordText.setText("");
+					account.printAccount();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+			
 			
 		}
 		if(e.getSource() == gotoInventory) {

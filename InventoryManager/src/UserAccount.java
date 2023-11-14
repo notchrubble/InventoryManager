@@ -19,18 +19,24 @@ public class UserAccount {
 	public HashMap<String, String> loadAccounts() throws IOException{
 		
 		HashMap<String, String> listAccounts = new HashMap<>();
-		BufferedReader reader = new BufferedReader(new FileReader(accountFile));
-		String line = reader.readLine();
 		
-		while(line != null) {
-			String[] parts = line.split(":");
+		try (BufferedReader reader = new BufferedReader(new FileReader(accountFile))) {
+			String line;
 			
-			if(parts.length == 2) {
-				listAccounts.put(parts[0], parts[1]);
+			while((line = reader.readLine()) != null) {
+				String[] parts = line.split(":");
+				
+				if(parts.length == 2) {
+					String username = parts[0].replaceAll("[^a-zA-Z0-9]", "");
+					String password = parts[1].replaceAll("[^a-zA-Z0-9]", "");
+					listAccounts.put(username, password);
+					System.out.println(username + " "+ password);
+				}
+				printAccount();
 			}
-			
-			line = reader.readLine();
 		}
+		System.out.println(accountFile);
+		
 		return listAccounts;
 	}
 	
@@ -40,9 +46,11 @@ public class UserAccount {
 	}
 	
 	public void saveAccounts() throws IOException {
-		PrintWriter writer = new PrintWriter (new FileWriter(accountFile));
-		for (HashMap.Entry <String, String> entry : loginInfo.entrySet()) {
-			writer.println(entry.getKey() + ":" + entry.getValue());
+		try (PrintWriter writer = new PrintWriter (new FileWriter(accountFile))) {
+			for (HashMap.Entry <String, String> entry : loginInfo.entrySet()) {
+				writer.println(entry.getKey() + ":" + entry.getValue());
+				System.out.println(entry.getKey()+ " " + entry.getValue());
+			}
 		}
 	}
 	
