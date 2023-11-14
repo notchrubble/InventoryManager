@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 public class UserAccount {
 	private HashMap <String, String> loginInfo = new HashMap <String, String>();
 	private String accountFile;
@@ -14,6 +16,7 @@ public class UserAccount {
 	public UserAccount (String accountFile) throws IOException{
 		this.accountFile = accountFile;
 		loginInfo = loadAccounts();
+		printAccount();
 	}
 
 	public HashMap<String, String> loadAccounts() throws IOException{
@@ -30,9 +33,7 @@ public class UserAccount {
 					String username = parts[0].replaceAll("[^a-zA-Z0-9]", "");
 					String password = parts[1].replaceAll("[^a-zA-Z0-9]", "");
 					listAccounts.put(username, password);
-					System.out.println(username + " "+ password);
 				}
-				printAccount();
 			}
 		}
 		System.out.println(accountFile);
@@ -40,9 +41,16 @@ public class UserAccount {
 		return listAccounts;
 	}
 	
-	public void registerAccount (String usernam, String pwd) throws IOException {
-		loginInfo.put(usernam, pwd);
-		saveAccounts();
+	public void registerAccount (String username, String pwd) throws IOException {
+		if (!loginInfo.containsKey(username)) {
+			loginInfo.put(username, pwd);
+			saveAccounts();
+			JOptionPane.showMessageDialog(null, "Account registered successfully.");
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Username already exists. Please choose a different one.");
+		}
+		
 	}
 	
 	public void saveAccounts() throws IOException {
@@ -60,7 +68,7 @@ public class UserAccount {
 	
 	public void printAccount() {
 		for (Map.Entry<String, String> entry : loginInfo.entrySet()) {
-			System.out.println("Username: " + entry.getKey() + ", Value: " + entry.getValue());
+			System.out.println("Username: " + entry.getKey() + ", Password: " + entry.getValue());
 		}
 	}
 

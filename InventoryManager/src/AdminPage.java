@@ -90,11 +90,10 @@ public class AdminPage implements ActionListener {
 			else {
 				try {
 					account.registerAccount(username, pwd);
-					message.setForeground(Color.orange);
-					message.setText("User account added successfully!");
+
 					userNameText.setText("");
 					passwordText.setText("");
-					account.printAccount();
+
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
