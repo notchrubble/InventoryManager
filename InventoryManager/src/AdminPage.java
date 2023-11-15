@@ -28,6 +28,8 @@ public class AdminPage implements ActionListener {
 	JButton clear = new JButton("Clear");
 	JButton	gotoInventory = new JButton("Go to Inventory");
 	JButton deleteAccount = new JButton("Delete account");
+	JButton logoutButton = new JButton("Logout");
+	
 	
 	private UserAccount account;
 	
@@ -40,18 +42,24 @@ public class AdminPage implements ActionListener {
 		userNameText.setBounds(150, 100, 200, 25);
 		passwordText.setBounds(150, 150, 200, 25);
 		
-		register.setBounds(140, 200, 150, 25);
-		register.setFocusable(false);
-		register.addActionListener(this);
-		
-		clear.setBounds(280, 200, 75, 25);
+		clear.setBounds(225, 200, 75, 25);
 		clear.setFocusable(false);
 		clear.addActionListener(this);
+		
+		logoutButton.setBounds(150, 200, 75, 25);
+		logoutButton.setFocusable(false);
+		logoutButton.addActionListener(this);
+		
 		
 		deleteAccount.setBounds(350, 100, 150, 25);
 		deleteAccount.setFocusable(false);
 		deleteAccount.addActionListener(this);
 		
+		register.setBounds(350, 150, 150, 25);
+		register.setFocusable(false);
+		register.addActionListener(this);
+		register.setForeground(new Color(255, 108, 34));
+		register.setOpaque(true);
 		
 		gotoInventory.setBounds(470, 350, 150, 25);
 		gotoInventory.setFocusable(false);
@@ -66,6 +74,7 @@ public class AdminPage implements ActionListener {
 		frame.add(passwordText);
 		frame.add(register);
 		frame.add(clear);
+		frame.add(logoutButton);
 		frame.add(deleteAccount);
 		frame.add(message);
 		frame.add(gotoInventory);
@@ -127,6 +136,11 @@ public class AdminPage implements ActionListener {
 					e1.printStackTrace();
 			}
 }
+		}
+		
+		if(e.getSource() == logoutButton) {
+			frame.dispose();
+			new LoginPage(account.getLoginInfo());
 		}
 		
 	}

@@ -1,9 +1,12 @@
 package InventoryManager.src;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -23,10 +26,12 @@ public class LoginPage implements ActionListener{
 	//ImageIcon
 	ImageIcon image = new ImageIcon("distribution.png");
 	JLabel imageLabel = new JLabel(image);
+	JLabel changePassword = new JLabel("Change password");
 	
 	//Buttons
 	JButton loginButton = new JButton("Login");
 	JButton clearButton = new JButton("Clear");
+	JButton logoutButton = new JButton("Logout");
 	
 	
 	JTextField userIDField = new JTextField();
@@ -54,14 +59,34 @@ public class LoginPage implements ActionListener{
 		messageLabel.setBounds(25, 250, 300, 35);
 		messageLabel.setFont(new Font(null, Font.ITALIC,18));
 		
-		loginButton.setBounds(125, 200, 100, 25);
+		changePassword.setBounds(150, 225, 150, 25);
+		changePassword.setFont(new Font("Arial", Font.PLAIN, 12));
+		changePassword.setForeground(new Color(255, 108, 3));
+		changePassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		changePassword.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				//open new frame for changing password
+				frame.dispose();
+				try {
+					new ChangePassword(loginInfo);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		
+		loginButton.setBounds(50, 200, 100, 25);
 		loginButton.setFocusable(false);
 		loginButton.addActionListener(this);
 		
-		clearButton.setBounds(225, 200, 100, 25);
+		clearButton.setBounds(150, 200, 100, 25);
 		clearButton.setFocusable(false);
 		clearButton.addActionListener(this);
 		
+		logoutButton.setBounds(250, 200, 100, 25);
+		logoutButton.setFocusable(false);
+		logoutButton.addActionListener(this);
 		
 		rightPanel.setBounds(400, 10, 390, 370);
 		rightPanel.setBackground(new Color(224, 244, 255));
@@ -79,7 +104,9 @@ public class LoginPage implements ActionListener{
 		frame.add(messageLabel);
 		frame.add(loginButton);
 		frame.add(clearButton);
+		frame.add(logoutButton);
 		frame.add(rightPanel);
+		frame.add(changePassword);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 420);
@@ -129,7 +156,12 @@ public class LoginPage implements ActionListener{
 				messageLabel.setForeground(Color.red);
 				messageLabel.setText("Invalid username or password!");
 			}
-		}		
+		}
+		
+		if(e.getSource() == logoutButton) {
+			frame.dispose();
+			new LoginPage(loginInfo);
+		}
 
 	}
 

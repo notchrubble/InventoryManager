@@ -50,9 +50,17 @@ public class UserAccount {
 		else {
 			JOptionPane.showMessageDialog(null, "Username already exists. Please choose a different one.");
 		}
-		
 	}
 	
+	public void updatePassword(String username, String pwd) throws IOException {
+		if(loginInfo.containsKey(username)) {
+			loginInfo.put(username, pwd);
+			saveAccounts();
+		}
+		else {
+			JOptionPane.showMessageDialog(null, "Username does not exist");
+		}
+	}
 	public void deleteAccount(String username) throws IOException {
 		if(loginInfo.containsKey(username)) {
 			loginInfo.remove(username);
