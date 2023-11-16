@@ -7,30 +7,30 @@ import java.awt.event.*;
 public class Categories extends JFrame implements ActionListener {
     private JButton viewButton;
     private JButton addButton;
-    private JButton quitButton;
+    private JButton backButton;
 
     public Categories() {
         setTitle("Categories Page");
         setSize(500, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Create buttons
         viewButton = new JButton("View Categories");
         addButton = new JButton("Add Category");
-        quitButton = new JButton("Quit");
+        backButton = new JButton("Back");
 
         // Add action listeners to buttons
         viewButton.addActionListener(this);
         addButton.addActionListener(this);
-        quitButton.addActionListener(this);
+        backButton.addActionListener(this);
 
         // Add buttons to content pane
         Container contentPane = getContentPane();
         contentPane.setLayout(new GridLayout(3, 1));
         contentPane.add(viewButton);
         contentPane.add(addButton);
-        contentPane.add(quitButton);
+        contentPane.add(backButton);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -40,8 +40,8 @@ public class Categories extends JFrame implements ActionListener {
         } else if (e.getSource() == addButton) {
             // Add a category
             System.out.println("Adding a category...");
-        } else if (e.getSource() == quitButton) {
-            // Code to quit the function
+        } else if (e.getSource() == backButton) {
+            // Code to go back to previous page
             dispose();
         }
     }

@@ -21,6 +21,7 @@ public class main extends JFrame implements ActionListener {
     private JPanel sideBar = new JPanel();
     private JButton moveButton = new JButton(">");
     private boolean isSideBarOpen = false;
+    private JTextField menuText = new JTextField("Menu");
 
     main() {
         setLayoutManager();
@@ -41,8 +42,10 @@ public class main extends JFrame implements ActionListener {
         loginButton.setBounds(50, 300, 100, 30);
         resetButton.setBounds(200, 300, 100, 30);
         invalidLogin.setBounds(50, 250, 200, 30);
-        sideBar.setBounds(0, 0, 200, 600);
         moveButton.setBounds(0, 0, 50, 50);
+        menuText.setBounds(50, 0, 50, 50);
+        menuText.setEditable(false); // make menuText uneditable
+        sideBar.setBounds(0, 0, 250, 600); // increase width of sideBar
     }
 
     public void addComponentsToContainer() {
@@ -61,9 +64,9 @@ public class main extends JFrame implements ActionListener {
         JButton button1 = new JButton("Product Page");
         JButton button2 = new JButton("Categories Page");
         JButton button3 = new JButton("Search Page");
-        button1.setBounds(50, 100, 100, 30);
-        button2.setBounds(50, 150, 100, 30);
-        button3.setBounds(50, 200, 100, 30);
+        button1.setBounds(25, 100, 150, 30);
+        button2.setBounds(25, 150, 150, 30);
+        button3.setBounds(25, 200, 150, 30);
         sideBar.add(button1);
         sideBar.add(button2);
         sideBar.add(button3);
@@ -84,10 +87,15 @@ public class main extends JFrame implements ActionListener {
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Search SearchPage = new Search();
-                SearchPage.setVisible(true);
+                try {
+                    Search SearchPage = new Search();
+                    SearchPage.setVisible(true);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
         });
+            
         sideBar.setVisible(false);
         moveButton.setVisible(false);
         // Set the z-order of the moveButton to be higher than the sideBar
@@ -142,17 +150,36 @@ public class main extends JFrame implements ActionListener {
                 JFrame mainPage = new JFrame();
                 mainPage.setTitle("Main page");
                 mainPage.setVisible(true);
-                mainPage.setBounds(10, 10, 370, 600);
+                mainPage.setBounds(0, 0, 500, 600);
+                mainPage.setLocationRelativeTo(null); // center the main page
                 mainPage.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                mainPage.setResizable(false);
+                mainPage.setResizable(true); // set resizable to true
                 Container mainContainer = mainPage.getContentPane();
                 mainContainer.setLayout(null);
                 mainContainer.add(sideBar);
                 mainContainer.add(moveButton);
+                mainContainer.add(menuText);
                 sideBar.setVisible(false);
                 moveButton.setVisible(true);
+                menuText.setVisible(true); // make menuText visible
                 // Set the z-order of the moveButton to be higher than the sideBar
                 mainContainer.setComponentZOrder(moveButton, 0);
+                
+                // Add a title to the main page with a grey background
+                JLabel titleLabel = new JLabel("Welcome to the Inventory Manager");
+                titleLabel.setHorizontalAlignment(JLabel.CENTER);
+                titleLabel.setOpaque(true);
+                titleLabel.setBackground(Color.GRAY);
+                mainContainer.add(titleLabel);
+
+                mainPage.addComponentListener(new ComponentAdapter() {
+                    @Override
+                    public void componentResized(ComponentEvent e) {
+                        titleLabel.setBounds(0, 0, mainPage.getWidth(), 50);
+                        sideBar.setBounds(0, 50, 200, mainPage.getHeight() - 50);
+                        menuText.setBounds(50, 0, 50, 50); // set location of menuText
+                    }
+                });
             } else {
                 invalidLogin.setText("Invalid username or password");
             }
@@ -166,7 +193,8 @@ public class main extends JFrame implements ActionListener {
         main frame = new main();
         frame.setTitle("Login Form");
         frame.setVisible(true);
-        frame.setBounds(10, 10, 370, 600);
+        frame.setBounds(0, 0, 370, 600);
+        frame.setLocationRelativeTo(null); // center the login form
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
     }
