@@ -23,7 +23,7 @@ public class ProductPage extends JFrame implements ActionListener {
         displayButton = new JButton("Display Products");
         backButton = new JButton("Back");
 
-        // Add action listeners to buttons
+        // Add action listeners to buttons 
         addButton.addActionListener(this);
         displayButton.addActionListener(this);
         backButton.addActionListener(this);

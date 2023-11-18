@@ -15,7 +15,7 @@ public class Categories extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Create buttons
+        // Create buttons 
         viewButton = new JButton("View Categories");
         addButton = new JButton("Add Category");
         backButton = new JButton("Back");

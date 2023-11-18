@@ -15,7 +15,7 @@ public class Search extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Initialize items HashMap with some example data
+        // Initialize items HashMap with some example data 
         items = new HashMap<>();
         items.put("apple", 5);
         items.put("banana", 3);
