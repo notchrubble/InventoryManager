@@ -11,6 +11,8 @@ import javax.swing.JTextField;
 
 public class AddToUI {
 	
+	
+	//Builder Method to construct a JLabel with values passed in for x and y coords -- top, left, bottom, and right padding
 	static void label(JPanel panel, String input, int x, int y, int top, int left, int bottom, int right) {
 		
 		JLabel labelfield = new JLabel(input);
@@ -24,7 +26,7 @@ public class AddToUI {
 	}
 	
 	
-
+	//Builder Method to construct a JTextField using same methodology as above. Returns the textfield so that it is interactable after placement
 	static JTextField userText(JPanel panel, int x, int y, int top, int left, int bottom, int right) {
 		
 		JTextField textfield = new JTextField(15);
@@ -39,6 +41,7 @@ public class AddToUI {
 		return textfield;		
 	}
 	
+	//Builder Method to construct a JPassword field. Returns the JPassword so that it is interactable after placement.
 	static JPasswordField userPass(JPanel panel, int x, int y, int top, int left, int bottom, int right) {
 		
 		JPasswordField passfield = new JPasswordField(15);
@@ -53,6 +56,7 @@ public class AddToUI {
 		return passfield;
 	}
 	
+	//Builder Method to construct a JButton field. Returns the JButton so that it is interactable after placement.
 	static JButton button(JPanel panel, String input, int x, int y, int top, int left, int bottom, int right) {
 		
 		JButton buttonfield = new JButton(input);

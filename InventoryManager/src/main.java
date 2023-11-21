@@ -1,10 +1,10 @@
 
 public class main {
 	
-    public static void main(String[] args){
-    	
+	
+    public static void main(String[] args){ 	
         
-		Login.showLandingPage();
+		Login.showLandingPage();	//Shows the login page prompting for username and password.
 		
     }
 }

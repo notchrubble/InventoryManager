@@ -33,6 +33,6 @@ public class Inventory {
 		 AdminFrame.setSize(new Dimension(1280, 720));
 		 AdminFrame.setLocationRelativeTo(null);
 		 AdminFrame.setVisible(true);
-		return AdminPanel;
+		 return AdminPanel;
 		 }
 }
