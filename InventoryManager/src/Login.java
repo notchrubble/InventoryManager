@@ -7,12 +7,8 @@ import javax.swing.*;
 
 
 
-
-
-
 public class Login extends AccountManager{
 
-	
 	public static void showLandingPage(){
 		
 		JFrame frame = new JFrame("Inventory Manager");
@@ -21,16 +17,9 @@ public class Login extends AccountManager{
 		JPanel panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.gray);
 		
-		JTextField u = AddToUI.userText(panel, 1, 0, 10, 0, 0, 80);
-		JPasswordField p = AddToUI.userPass(panel, 1, 1, 10, 0, 0, 80);
-		
-		String username = u.getText();
-		
-		char[]pchar = p.getPassword();
-		
-		String password = new String(pchar);
-		
-		
+		JTextField username = AddToUI.userText(panel, 1, 0, 10, 0, 0, 80);
+		JPasswordField password = AddToUI.userPass(panel, 1, 1, 10, 0, 0, 80);
+				
         AddToUI.label(panel, "Username", 0, 0, 10, 40, 0, 0);
 		AddToUI.label(panel, "Password", 0, 1, 10, 40, 0, 0);
         
@@ -39,13 +28,15 @@ public class Login extends AccountManager{
         b.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent e) {
         		
-        		if (AccountManager.isValid(username, password)){
-        			Register.CreateAcc();
+        		String usernameInput = username.getText();
+        		char[]pchar = password.getPassword();
+        		String passwordInput = new String(pchar);
+        		
+        		if (AccountManager.isAdmin(usernameInput, passwordInput)) {
+        			AdminPage.showAdminPage();
         		}
-        		else
-        		{
-        			System.out.print("Wrong Password");
-        		}
+        		
+        		
         		
         	}
         });     
@@ -55,13 +46,6 @@ public class Login extends AccountManager{
         frame.add(panel, BorderLayout.WEST);
         frame.setVisible(true);
        
-	}
-	
-	public static void showAdminPage() {
-		
-		
-		
-		
 	}
 	
 }

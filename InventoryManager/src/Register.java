@@ -10,9 +10,8 @@ import javax.swing.JTextField;
 
 public class Register {
 	
-	public static void CreateAcc() {
+	public static void createAcc() {
 		
-	
 		
 		 JFrame inputFrame = new JFrame("Create your Account!");
 	     inputFrame.setSize(300, 150);
@@ -39,7 +38,7 @@ public class Register {
 	 	     String password = new String(pchar);
 	    	 
 	    	 AccountManager.addUser(username, password);
-	    	 AccountManager.display();
+	    	 //AccountManager.display();
 	    	 
 	        	    	}  	    	
 	        	    });
