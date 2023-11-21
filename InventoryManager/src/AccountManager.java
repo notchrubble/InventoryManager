@@ -23,7 +23,7 @@ public class AccountManager{
 	
 	public static boolean isValid(String username, String password) {
 		String storedPassword = user_accs.get(username);
-		return storedPassword != null && storedPassword.equalsIgnoreCase(password);
+		return storedPassword != null && storedPassword.equals(password);
 	}
 	
 	
@@ -31,7 +31,6 @@ public class AccountManager{
 	
 	
 	public static boolean isAdmin(String username, String password) {
-		
 		String storedPassword = user_accs.get(username);
 		
 		if (user_accs.containsKey(username) && username.equalsIgnoreCase("admin")){
@@ -39,8 +38,6 @@ public class AccountManager{
 		}
 		return false;
 	}
-	
-	
 	
 	
 	

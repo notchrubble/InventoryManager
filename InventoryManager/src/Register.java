@@ -38,7 +38,9 @@ public class Register {
 	 	     String password = new String(pchar);
 	    	 
 	    	 AccountManager.addUser(username, password);
-	    	 //AccountManager.display();
+	    	 AccountManager.display();
+	    	 inputFrame.dispose();
+	    	 
 	    	 
 	        	    	}  	    	
 	        	    });

@@ -19,34 +19,29 @@ public class Login extends AccountManager{
 		
 		JTextField username = AddToUI.userText(panel, 1, 0, 10, 0, 0, 80);
 		JPasswordField password = AddToUI.userPass(panel, 1, 1, 10, 0, 0, 80);
+		JButton b = AddToUI.button(panel, "Login", 1, 3, 10, 0, -100, 80);
 				
         AddToUI.label(panel, "Username", 0, 0, 10, 40, 0, 0);
 		AddToUI.label(panel, "Password", 0, 1, 10, 40, 0, 0);
         
-		JButton b = AddToUI.button(panel, "Login", 1, 3, 10, 0, -100, 80);
   
         b.addMouseListener(new MouseAdapter() {
+        	
         	public void mouseClicked(MouseEvent e) {
-        		
         		String usernameInput = username.getText();
         		char[]pchar = password.getPassword();
         		String passwordInput = new String(pchar);
         		
         		if (AccountManager.isAdmin(usernameInput, passwordInput)) {
-        			AdminPage.showAdminPage();
-        		}
-        		
-        		
-        		
+        			Inventory.showAdminPage();
+        			frame.dispose();
+        			
+        		}        		
         	}
         });     
-        
-        
-
         frame.add(panel, BorderLayout.WEST);
         frame.setVisible(true);
        
 	}
-	
 }
 
