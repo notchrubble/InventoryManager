@@ -17,10 +17,15 @@ public class Login extends AccountManager{
 		JPanel panel = new JPanel(new GridBagLayout());
 		panel.setBackground(Color.gray);
 		
+		JPanel imagePanel = new JPanel();
+		
 		JTextField username = AddToUI.userText(panel, 1, 0, 10, 0, 0, 80);			//Creates JTextField using a Builder Design Pattern Method.
 		JPasswordField password = AddToUI.userPass(panel, 1, 1, 10, 0, 0, 80);		//Creates component using AddToUI method
 		JButton b = AddToUI.button(panel, "Login", 1, 3, 10, 0, -100, 80);			//Passes through values for x and y, top, left, bottom, and right padding.
-				
+		
+		ImageIcon image = new ImageIcon("Art/cart.png");
+		
+		AddToUI.imageLabel(imagePanel, image, 0, 0, 10, 40, 0, 0);
         AddToUI.label(panel, "Username", 0, 0, 10, 40, 0, 0);			//Creates username label
 		AddToUI.label(panel, "Password", 0, 1, 10, 40, 0, 0);			//Creates password label.
         
@@ -33,13 +38,15 @@ public class Login extends AccountManager{
         		String passwordInput = new String(pchar);				//Convert array of characters into string to save password entered.
         		
         		if (AccountManager.isAdmin(usernameInput, passwordInput)) {			//Passes username and password through boolean method to verify if Admin.
-        			Inventory.showAdminPage();			//If credentials validated as admin, show the inventory page for Admins.
+        			Inventory.homePage();			//If credentials validated as admin, show the inventory page for Admins.
         			frame.dispose();					//Disposes of the login screen for readability.
         			
         		}        		
         	}
         });     
-        frame.add(panel, BorderLayout.WEST);			//Adds panel to the west side of the frame using a BorderLayout 
+        frame.add(imagePanel, BorderLayout.EAST);
+        frame.add(panel, BorderLayout.WEST);
+        frame.pack();
         frame.setVisible(true);							//Sets frame to be visible to the user.
        
 	}

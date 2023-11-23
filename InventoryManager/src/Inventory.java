@@ -11,28 +11,17 @@ import javax.swing.JPanel;
 
 public class Inventory {
 	
-	public static JPanel showAdminPage() {
+	public static JFrame homePage() {
 		
-		JFrame AdminFrame = new JFrame("Admin Page");
+		JFrame homepage = new JFrame("Inventory Homepage");
 		
-		JPanel AdminPanel = new JPanel(new GridBagLayout());
-		AdminPanel.setBackground(Color.gray);
 		
-		JButton b = AddToUI.button(AdminPanel, "Register Account", 2, 3, 10, 40, 650, 40);
-		
-		 b.addMouseListener(new MouseAdapter() {
-	        	public void mouseClicked(MouseEvent e) {
-	        		
-	        		Register.createAcc();
-	        		
-	        		}
-	        	});
 		 
 		 
-		 AdminFrame.add(AdminPanel, BorderLayout.WEST);
-		 AdminFrame.setSize(new Dimension(1280, 720));
-		 AdminFrame.setLocationRelativeTo(null);
-		 AdminFrame.setVisible(true);
-		 return AdminPanel;
+	
+		homepage.setSize(new Dimension(1280, 720));
+		homepage.setLocationRelativeTo(null);
+		homepage.setVisible(true);
+		return homepage;
 		 }
 }
