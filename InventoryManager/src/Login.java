@@ -37,7 +37,7 @@ public class Login extends AccountManager{
         		char[]pchar = password.getPassword();					//Once Login button is clicked, save password entered into a array of characters.
         		String passwordInput = new String(pchar);				//Convert array of characters into string to save password entered.
         		
-        		if (AccountManager.isAdmin(usernameInput, passwordInput)) {			//Passes username and password through boolean method to verify if Admin.
+        		if (AccountManager.isValid(usernameInput, passwordInput)) {			//Passes username and password through boolean method to verify if Admin.
         			Inventory.homePage();			//If credentials validated as admin, show the inventory page for Admins.
         			frame.dispose();					//Disposes of the login screen for readability.
         			

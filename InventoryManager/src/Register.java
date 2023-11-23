@@ -36,7 +36,6 @@ public class Register {
 	    	 
 	 	     char[]pchar = p.getPassword();
 	 	     String password = new String(pchar);
-	    	 
 	    	 AccountManager.addUser(username, password);
 	    	 AccountManager.display();
 	    	 inputFrame.dispose();

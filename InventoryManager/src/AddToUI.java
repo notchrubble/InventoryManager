@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -9,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 
 public class AddToUI {
 	
@@ -59,6 +61,15 @@ public class AddToUI {
 		buttonfield.setPreferredSize(new Dimension(200, 35));
 		addComponent(panel, buttonfield, x, y, top, left, bottom, right);
 		return buttonfield;
+	}
+	
+	public static JToolBar createToolBar() {
+		JToolBar toolbar = new JToolBar();
+		toolbar.setBackground(Color.gray);
+		toolbar.setPreferredSize(new Dimension(1000, 50));
+		toolbar.setFloatable(false);
+        toolbar.setBorderPainted(false);
+        return toolbar;
 	}
 	
 
