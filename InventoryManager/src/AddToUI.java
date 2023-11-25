@@ -4,11 +4,13 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 
@@ -63,10 +65,18 @@ public class AddToUI {
 		return buttonfield;
 	}
 	
+	public static JPopupMenu popMenu() {
+		JPopupMenu popupMenu = new JPopupMenu();
+		return popupMenu;
+	}
+	
 	public static JToolBar createToolBar() {
 		JToolBar toolbar = new JToolBar();
+		
+	    toolbar.add(Box.createHorizontalGlue());
+	    toolbar.setOrientation(JToolBar.HORIZONTAL);
 		toolbar.setBackground(Color.gray);
-		toolbar.setPreferredSize(new Dimension(1000, 50));
+		toolbar.setPreferredSize(new Dimension(1000, 40));
 		toolbar.setFloatable(false);
         toolbar.setBorderPainted(false);
         return toolbar;

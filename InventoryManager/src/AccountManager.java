@@ -20,20 +20,15 @@ public class AccountManager{
 
 	}
 	
-	
-	
-	
 	//Validates if user is legit by cross referencing entered username and password with those already populated in user_accs.
 	//If the password of a non existent account is found it will be null and will return false.
 	//If the password entered does not match with the username in user_accs then return false.
 	//Return true otherwise.
 	public static boolean isValid(String username, String password) {
+		
 		String storedPassword = user_accs.get(username);
 		return storedPassword != null && storedPassword.equals(password);
 	}
-	
-	
-	
 	
 	//Validates if credentials entered belong to Admin, if username entered exists in user_accs and username = "admin" then cross reference password.
 	//If password entered does not equal password matching with admin then return false.
@@ -45,7 +40,6 @@ public class AccountManager{
 		}
 		return false;
 	}
-	
 	
 	
 	public static void display() {
