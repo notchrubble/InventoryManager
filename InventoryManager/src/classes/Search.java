@@ -12,7 +12,7 @@ public class Search extends JFrame {
     public Search() {
         setTitle("Search Page");
         setSize(500, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         // Initialize items HashMap with some example data 
