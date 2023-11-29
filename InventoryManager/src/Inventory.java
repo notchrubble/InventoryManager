@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,70 +16,67 @@ import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JToolBar;
 
-public class Inventory extends Login {
+public class Inventory {
 
-    public static JFrame homePage(String usernameInput, String passwordInput) {
+    public JPanel homePage() {
 
     	ImageIcon icon = new ImageIcon("Art/profile.png");
-    	 
-        JFrame frame = new JFrame("Admin Page");
-      
-        JToolBar toolBar = AddToUI.createToolBar();      
-        JLabel label = new JLabel(icon);
+    	JLabel iconHolder = new JLabel(icon);
+        JPanel cardPanel = new JPanel();
         
+        JToolBar toolBar = AddToUI.createToolBar(); 
+        toolBar.add(iconHolder);
+        cardPanel.add(toolBar, BorderLayout.NORTH);
+       
         JPopupMenu popupMenu = AddToUI.popMenu();
- 
-        toolBar.add(label);
-        frame.add(toolBar, BorderLayout.NORTH);
-           
         JMenuItem logout = new JMenuItem("Logout");
-        popupMenu.add(logout);
-        
         JMenuItem AddUser = new JMenuItem("Add User");
         
+        popupMenu.add(logout);
+        popupMenu.add(AddUser);
         
         
         
         
-        if (AccountManager.isAdmin(usernameInput, passwordInput)) {
-        	popupMenu.add(AddUser);
-        }
-        
- 
         
         
-        label.addMouseListener(new MouseAdapter() {						
-        	
+        
+        iconHolder.addMouseListener(new MouseAdapter() {						
         	public void mouseClicked(MouseEvent e) {
-      
-        		popupMenu.show(label, 0, label.getHeight());
-        		
+        		popupMenu.show(iconHolder, 0, iconHolder.getHeight());
         	}
         });     
         
-        logout.addMouseListener(new MouseAdapter() {	
-        	
-        	public void mouseClicked(MouseEvent e) {
         
-        		
-        	
+        logout.addActionListener(new ActionListener() {	        	
+        	public void actionPerformed(ActionEvent e) {
+        		Login.resetFields();
+        		CardLayoutController.showLogin();
         	}
         });  
         
         
-        
-
+        AddUser.addActionListener(new ActionListener() {	
+        	
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		AccountManager.createAcc();
    
+        		
+        	
+        	}
+        	
+        });  
+        
+        
+        
+        
         
         
         
 
-       
-        frame.setSize(new Dimension(1280, 720));
-        frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        
 
-        return frame;
+        return cardPanel;
     }
 }
