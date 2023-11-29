@@ -1,3 +1,8 @@
+/* 
+
+//Not using this right now
+//Use Nick's main for now
+
 package main;
 import java.io.IOException;
 
@@ -15,3 +20,4 @@ public class main {
 	}
 
 }
+*/
