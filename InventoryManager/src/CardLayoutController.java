@@ -1,4 +1,6 @@
 import java.awt.CardLayout;
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -29,6 +31,7 @@ public class CardLayoutController {
 		
 		frame.getContentPane().add(cardPanel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(1280, 720));
 		frame.pack();
 		frame.setVisible(true);
 		flag = true;
@@ -46,7 +49,10 @@ public class CardLayoutController {
 		
 	}
 	public static void showInven() {
+		
+		frame.setResizable(false);
 		frame.setTitle("Inventory Homepage");
+		
 		cardLayout.show(cardPanel, "Inventory");
 	}
 }

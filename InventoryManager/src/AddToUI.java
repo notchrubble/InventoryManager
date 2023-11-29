@@ -11,8 +11,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.table.DefaultTableModel;
 
 public class AddToUI {
 	
@@ -76,11 +79,23 @@ public class AddToUI {
 	    toolbar.add(Box.createHorizontalGlue());
 	    toolbar.setOrientation(JToolBar.HORIZONTAL);
 		toolbar.setBackground(Color.gray);
-		toolbar.setPreferredSize(new Dimension(1000, 40));
+		toolbar.setPreferredSize(new Dimension(1280, 40));     
 		toolbar.setFloatable(false);
         toolbar.setBorderPainted(false);
         return toolbar;
 	}
+	
+	public static JTable createTable(JPanel panel, String[] columnNames, Object[][] data, int x, int y, int top, int left, int bottom, int right) {
+    
+        JTable table = new JTable(data, columnNames);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(1200,640));
+
+        addComponent(panel, scrollPane, x, y, top, left, bottom, right);
+
+        return table;
+    }
 	
 
 }

@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JTable;
 import javax.swing.JToolBar;
 
 public class Inventory {
@@ -36,8 +37,14 @@ public class Inventory {
         popupMenu.add(AddUser);
         
         
+        String [][] items = {
+        		{"item1", "Quantity", "Other value" },
+        		{"item2", "Quantity 2", "Other value 2"}
+        };
         
-        
+        String [] itemTraits = {"Name", "Amount", "Other"};
+      
+        JTable table = AddToUI.createTable(cardPanel, itemTraits, items, 0, 1, 10, 0, 0, 0);
         
         
         
