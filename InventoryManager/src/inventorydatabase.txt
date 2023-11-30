@@ -1,0 +1,5 @@
+item2,15,Other value 2
+item3,20,Other value 3
+item4,5,Other value 4
+item5,30,Other value 5
+briefcase,143,shipment arriving 10/03/2024
