@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 public class LoginPage implements ActionListener{
 
@@ -142,8 +143,16 @@ public class LoginPage implements ActionListener{
 					else {
 						messageLabel.setForeground(Color.green);
 						messageLabel.setText("Login Successfully!");
+						
 					//goto Inventory
-						new Inventory();
+					JFrame inventoryFrame = new JFrame("Inventory"); // Create a new frame for inventory
+					Inventory inventory = new Inventory(); // Create an instance of Inventory
+					JPanel inventoryPanel = inventory.homePage(); // Get the inventory panel
+		
+					inventoryFrame.add(inventoryPanel); // Add the panel to the frame
+					inventoryFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					inventoryFrame.setSize(800, 600); // Set the size of the frame
+					disposeDelay(frame, inventoryFrame);
 					}
 				}
 				else {
@@ -164,4 +173,17 @@ public class LoginPage implements ActionListener{
 
 	}
 
+	private void disposeDelay (JFrame oldFrame, JFrame newFrame) {
+		int delay = 800;
+		Timer timer = new Timer(delay, new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				oldFrame.dispose();
+				newFrame.setVisible(true);
+							}
+			
+		});
+		timer.start();
+	}
 }
