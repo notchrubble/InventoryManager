@@ -8,6 +8,7 @@ import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JPopupMenu;
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class AddToUI {
 	
-	 private static void addComponent(JPanel panel, Component component, int x, int y, int top, int left, int bottom, int right) {
+	 public static void addComponent(JPanel panel, Component component, int x, int y, int top, int left, int bottom, int right) {
 	        GridBagConstraints gbc = new GridBagConstraints();
 	        gbc.gridx = x;
 	        gbc.gridy = y;
@@ -97,5 +98,24 @@ public class AddToUI {
         return table;
     }
 	
-
-}
+	public static JTable addItemDialogue(JTable table) {
+		  JTextField nameField = new JTextField();
+          JTextField amountField = new JTextField();
+          JTextField otherField = new JTextField();
+  
+          Object[] message = {
+              "Name:", nameField,
+              "Amount:", amountField,
+              "Other:", otherField
+          };
+  
+          int option = JOptionPane.showConfirmDialog(null, message, "Add New Item", JOptionPane.OK_CANCEL_OPTION);
+          if (option == JOptionPane.OK_OPTION) {
+        	  DefaultTableModel model = (DefaultTableModel) table.getModel();
+              model.addRow(new Object[]{nameField.getText(), amountField.getText(), otherField.getText(), "", ""});
+    
+          }
+          return table;
+      }
+	}
+	
