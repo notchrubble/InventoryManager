@@ -1,7 +1,3 @@
-item2,15,Other value 2
-item3,20,Other value 3
-item4,5,Other value 4
-item5,30,Other value 5
-briefcase,143,shipment arriving 10/03/2024
-new item,1000,shipment on monday
-luci hash,50,zaza
+rabadons deathcap,1900,massive AP boost
+void staff,1200,AP pen
+Sunfire Cape,2400,Armor + health

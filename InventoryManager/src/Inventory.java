@@ -33,12 +33,18 @@ public class Inventory {
     	
     	String[][]items = FileHandler.InventoryFromFile("files/inventorydatabase.txt");
         String[] itemTraits = { "Name", "Amount", "Other", "Edit", "Delete" };
-        
         tableModel = new DefaultTableModel(items, itemTraits);
-        JTable table = new JTable(tableModel);
+        
+        JTable table = new JTable(tableModel) {
+        	
+        	public boolean isCellEditable(int row, int column) {
+                return column == 4;
+                
+            }
+        };
         
         JPanel cardPanel = new JPanel();
-
+        
     	ImageIcon icon = new ImageIcon("Art/profile.png");
     	ImageIcon addIcon = new ImageIcon("art/add.png");
     	
@@ -55,16 +61,21 @@ public class Inventory {
         
         popupMenu.add(logout);
         popupMenu.add(AddUser);
-        
         toolBar.add(addIconHolder);
         toolBar.add(iconHolder);
-        
         cardPanel.add(toolBar, BorderLayout.NORTH);
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(1200,640));
+        
         AddToUI.addComponent(cardPanel, scrollPane, 0, 0, 0, 0, 0, 0);
+        
+        AddToUI.addButtonToTable(table, 3, "Edit", (tbl, row) ->{
+        	
+        });
+ 
            
+        
         
         iconHolder.addMouseListener(new MouseAdapter() {	
         	
@@ -75,14 +86,14 @@ public class Inventory {
         }); 
         
         addIconHolder.addMouseListener(new MouseAdapter() {
-        	
+        	FileHandler handler = new FileHandler(table);
         	public void mouseClicked(MouseEvent e) {
-        		FileHandler handler = new FileHandler(table);
-        		AddToUI.addItemDialogue(table);
+        		AddToUI.newItemDialogue(table);
         		handler.InventoryToFile("files/inventorydatabase.txt");
         		
         	}
         });   
+        
         
         logout.addActionListener(new ActionListener() {	        	
         	public void actionPerformed(ActionEvent e) {
@@ -103,7 +114,18 @@ public class Inventory {
         
         return cardPanel;
     }
+    
+    
+    
+    
+    
+        
+        
+        
+    
     }
+    
+
     
     
     
