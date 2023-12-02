@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
+import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,6 +26,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class Inventory {
 	
@@ -42,6 +45,13 @@ public class Inventory {
                 
             }
         };
+        
+        table.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
+
+        // Add action listener for the button
+        table.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField(), table));
+        
+        
         
         JPanel cardPanel = new JPanel();
         
@@ -70,12 +80,9 @@ public class Inventory {
         
         AddToUI.addComponent(cardPanel, scrollPane, 0, 0, 0, 0, 0, 0);
         
-        AddToUI.addButtonToTable(table, 3, "Edit", (tbl, row) ->{
-        	
-        });
  
-           
         
+          
         
         iconHolder.addMouseListener(new MouseAdapter() {	
         	
@@ -114,8 +121,56 @@ public class Inventory {
         
         return cardPanel;
     }
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+    	
+
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            setText("Delete");
+            return this;
+        }
+    }
     
     
+    class ButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+      
+        private int clickedRow; // Add this variable
+      
+        private String label;
+
+		private JTable table;
+
+        public ButtonEditor(JTextField textField, JTable table) {
+            super(textField);
+            this.table = table;
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(e -> {
+            	int row = table.convertRowIndexToModel(table.getEditingRow());
+            	fireEditingStopped();
+         
+                AddToUI.showEditDialog(row, table);
+            });
+            
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            return button;
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return label;
+        }
+    }
     
     
     

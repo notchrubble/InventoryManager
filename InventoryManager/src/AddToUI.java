@@ -10,6 +10,7 @@ import java.util.function.BiConsumer;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -110,73 +111,31 @@ public class AddToUI {
           return table;
       }
 	
-	public static void addButtonToTable(JTable table, int col, String text, BiConsumer<JTable, Integer> action) {
-		JButton button = new JButton(text);
-		
-		button.addActionListener(e -> {
-			int row = table.getSelectedRow();
-			
-			if (row != -1) {
-				action.accept(table, row);
-			}
-		});
-		table.getColumnModel().getColumn(col).setCellRenderer(new TableCellRenderer() {
-	        @Override
-	        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-	            return button;
-	        }
-	    });
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	 
-	
-	
-	
-	
-	
-	
-	/**
-	 public static void showEditDialog(int row, JTable tableModel) {
-	        String itemName = (String) tableModel.getValueAt(row, 0);
-	        String itemAmount = (String) tableModel.getValueAt(row, 1);
-	        String itemOther = (String) tableModel.getValueAt(row, 2);
+	public static void showEditDialog(int row, JTable tableModel) {
+        String itemName = (String) tableModel.getValueAt(row, 0);
+        String itemAmount = (String) tableModel.getValueAt(row, 1);
+        String itemOther = (String) tableModel.getValueAt(row, 2);
 
-	        JTextField nameField = new JTextField(itemName);
-	        JTextField amountField = new JTextField(itemAmount);
-	        JTextField otherField = new JTextField(itemOther);
+        JTextField nameField = new JTextField(itemName);
+        JTextField amountField = new JTextField(itemAmount);
+        JTextField otherField = new JTextField(itemOther);
 
-	        Object[] message = {
-	            "Name:", nameField,
-	            "Amount:", amountField,
-	            "Other:", otherField
-	        };
+        Object[] message = {
+            "Name:", nameField,
+            "Amount:", amountField,
+            "Other:", otherField
+        };
 
-	        int option = JOptionPane.showConfirmDialog(null, message, "Edit Item", JOptionPane.OK_CANCEL_OPTION);
-	        if (option == JOptionPane.OK_OPTION) {
-	            tableModel.setValueAt(nameField.getText(), row, 0);
-	            tableModel.setValueAt(amountField.getText(), row, 1);
-	            tableModel.setValueAt(otherField.getText(), row, 2);
-	            FileHandler handler = new FileHandler(tableModel);
-	            handler.InventoryToFile("files/inventorydatabase.txt");
-	        }
-	    }
-**/
-	}
+        int option = JOptionPane.showConfirmDialog(null, message, "Edit Item", JOptionPane.OK_CANCEL_OPTION);
+        if (option == JOptionPane.OK_OPTION) {
+            tableModel.setValueAt(nameField.getText(), row, 0);
+            tableModel.setValueAt(amountField.getText(), row, 1);
+            tableModel.setValueAt(otherField.getText(), row, 2);
+            FileHandler handler = new FileHandler(tableModel);
+            handler.InventoryToFile("files/inventorydatabase.txt");
+        }
+    }
+	
+
+}
 	
