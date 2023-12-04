@@ -1,24 +1,17 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.swing.Box;
-import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -26,7 +19,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
+
+
 
 public class Inventory {
 	
@@ -34,36 +28,46 @@ public class Inventory {
 	
     public JPanel homePage() {
     	
+    	
     	String[][]items = FileHandler.InventoryFromFile("files/inventorydatabase.txt");
-        String[] itemTraits = { "Name", "Amount", "Other", "Edit", "Delete" };
-        tableModel = new DefaultTableModel(items, itemTraits);
+        String[] itemTraits = { "Item Name", "Quantity", "Description", "Next Shipment", "Edit Information" };
+        
+        tableModel = new DefaultTableModel(items, itemTraits);       
         
         JTable table = new JTable(tableModel) {
-        	
         	public boolean isCellEditable(int row, int column) {
-                return column == 4;
-                
+                return column == 4;   
             }
         };
         
-        table.getColumnModel().getColumn(4).setCellRenderer(new ButtonRenderer());
-
-        // Add action listener for the button
-        table.getColumnModel().getColumn(4).setCellEditor(new ButtonEditor(new JTextField(), table));
         
+        
+        ButtonRenderer buttonRenderer = new ButtonRenderer();
+    	ButtonEditor buttonEditor = new ButtonEditor(new JTextField(), table);
+        
+        table.getColumnModel().getColumn(4).setCellRenderer(buttonRenderer);
+        table.getColumnModel().getColumn(4).setCellEditor(buttonEditor);
         
         
         JPanel cardPanel = new JPanel();
         
     	ImageIcon icon = new ImageIcon("Art/profile.png");
-    	ImageIcon addIcon = new ImageIcon("art/add.png");
+    	ImageIcon addIcon = new ImageIcon("art/plus.png");
+    	ImageIcon searchIcon = new ImageIcon("art/search.png");
+    	ImageIcon homeIcon = new ImageIcon("art/icons8-home-40.png");
+    	
     	
     	JLabel iconHolder = new JLabel(icon);
     	JLabel addIconHolder = new JLabel(addIcon);
+    	JLabel searchHolder = new JLabel(searchIcon);
+    	JLabel homeHolder = new JLabel(homeIcon);
     	
  
         JToolBar toolBar = AddToUI.createToolBar(); 
   
+        
+        
+        
         JPopupMenu popupMenu = AddToUI.popMenu();
         JMenuItem logout = new JMenuItem("Logout");
         JMenuItem AddUser = new JMenuItem("Add User");
@@ -71,6 +75,9 @@ public class Inventory {
         
         popupMenu.add(logout);
         popupMenu.add(AddUser);
+        toolBar.add(homeHolder);
+        toolBar.add(searchHolder);
+        toolBar.add(Box.createHorizontalStrut(1105));
         toolBar.add(addIconHolder);
         toolBar.add(iconHolder);
         cardPanel.add(toolBar, BorderLayout.NORTH);
@@ -121,64 +128,7 @@ public class Inventory {
         
         return cardPanel;
     }
-    class ButtonRenderer extends JButton implements TableCellRenderer {
-    	
-
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        @Override
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-            setText("Delete");
-            return this;
-        }
-    }
-    
-    
-    class ButtonEditor extends DefaultCellEditor {
-        protected JButton button;
-      
-        private int clickedRow; // Add this variable
-      
-        private String label;
-
-		private JTable table;
-
-        public ButtonEditor(JTextField textField, JTable table) {
-            super(textField);
-            this.table = table;
-            button = new JButton();
-            button.setOpaque(true);
-            button.addActionListener(e -> {
-            	int row = table.convertRowIndexToModel(table.getEditingRow());
-            	fireEditingStopped();
-         
-                AddToUI.showEditDialog(row, table);
-            });
-            
-        }
-
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
-            return button;
-        }
-
-        @Override
-        public Object getCellEditorValue() {
-            return label;
-        }
-    }
-    
-    
-    
-        
-        
-        
-    
-    }
+}
     
 
     

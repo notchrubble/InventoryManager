@@ -97,9 +97,9 @@ public class AddToUI {
           JTextField otherField = new JTextField();
   
           Object[] message = {
-              "Name:", nameField,
-              "Amount:", amountField,
-              "Other:", otherField
+              "Enter Item Name:", nameField,
+              "Enter Item Amount:", amountField,
+              "Enter Item Description:", otherField
           };
   
           int option = JOptionPane.showConfirmDialog(null, message, "Add New Item", JOptionPane.OK_CANCEL_OPTION);
@@ -121,9 +121,9 @@ public class AddToUI {
         JTextField otherField = new JTextField(itemOther);
 
         Object[] message = {
-            "Name:", nameField,
-            "Amount:", amountField,
-            "Other:", otherField
+            "New Item Name:", nameField,
+            "New Quantity", amountField,
+            "New Description", otherField
         };
 
         int option = JOptionPane.showConfirmDialog(null, message, "Edit Item", JOptionPane.OK_CANCEL_OPTION);

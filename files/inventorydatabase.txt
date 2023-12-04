@@ -1,3 +1,5 @@
-rabadons deathcap,1900,massive AP boost
-void staff,1200,AP pen
+rabadons deathcap,1200,massive AP boost
+void staff,1100,AP pen
 Sunfire Cape,2400,Armor + health
+wizard staff,100,otherworldy staff
+sunfire cape,1800,arriving tuesday
