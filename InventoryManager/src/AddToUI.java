@@ -84,7 +84,7 @@ public class AddToUI {
 		
 	    toolbar.add(Box.createHorizontalGlue());
 	    toolbar.setOrientation(JToolBar.HORIZONTAL);
-		toolbar.setBackground(Color.gray);
+		toolbar.setBackground(new Color(85,85,85));
 		toolbar.setPreferredSize(new Dimension(1280, 40));     
 		toolbar.setFloatable(false);
         toolbar.setBorderPainted(false);

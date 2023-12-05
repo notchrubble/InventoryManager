@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
-
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -43,7 +45,7 @@ public class Inventory {
         };
         
      
-        table.setPreferredSize(new Dimension(1280, 720));
+        //table.setPreferredSize(new Dimension(1280, 720));
         
         ButtonRenderer buttonRenderer = new ButtonRenderer();
     	ButtonEditor buttonEditor = new ButtonEditor(new JTextField(), table);
@@ -54,6 +56,8 @@ public class Inventory {
         
         JPanel cardPanel = new JPanel(new BorderLayout());
         JPanel infoPanel = new JPanel();
+     
+        infoPanel.setBackground(new Color(155,155,155));
         
     	ImageIcon icon = new ImageIcon("Art/profile.png");
     	ImageIcon addIcon = new ImageIcon("art/plus.png");
@@ -66,20 +70,40 @@ public class Inventory {
     	JLabel searchHolder = new JLabel(searchIcon);
     	JLabel homeHolder = new JLabel(homeIcon);
     	
-    	JLabel name = new JLabel("Enter Item");
+    	JLabel name = new JLabel();
+    	JLabel quantity = new JLabel();
+    	JLabel shipmentDate = new JLabel();
+    	
     	infoPanel.add(name);
+    	//infoPanel.add(quantity);
+    	//infoPanel.add(shipmentDate);
  
         JToolBar toolBar = AddToUI.createToolBar(); 
   
+        
+        Font font = new Font("Arial", Font.BOLD, 24);
+        name.setFont(font);
+        name.setForeground(Color.white);
+        
+        
+        
+        
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
                 if (!event.getValueIsAdjusting()) {
                     int selectedRow = table.getSelectedRow();
                     if (selectedRow != -1) {
-                        // Get information from the selected row and update the infoPanel
+         
                         String itemName = table.getValueAt(selectedRow, 1).toString();
+                        String itemQuantity = table.getValueAt(selectedRow, 2).toString();
+                        String itemDate = table.getValueAt(selectedRow, 4).toString();
+                        
+                        
                         name.setText(itemName);
-                        // Add more labels or components to display other information as needed
+                      
+                        quantity.setText(itemQuantity);
+                        shipmentDate.setText(itemDate);
+                        
                     }
                 }
             }
@@ -106,9 +130,10 @@ public class Inventory {
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(800,640));
    
+        infoPanel.setPreferredSize(new Dimension(cardPanel.getWidth()-scrollPane.getWidth(), cardPanel.getHeight()));
         
         cardPanel.add(scrollPane, BorderLayout.WEST);
-        cardPanel.add(infoPanel, BorderLayout.EAST);
+        cardPanel.add(infoPanel);
  
         
           
