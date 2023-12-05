@@ -18,6 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -30,26 +32,28 @@ public class Inventory {
     	
     	
     	String[][]items = FileHandler.InventoryFromFile("files/inventorydatabase.txt");
-        String[] itemTraits = { "Item Name", "Quantity", "Description", "Next Shipment", "Edit Information" };
+        String[] itemTraits = { "Item Number", "Item Name", "Quantity", "Description", "Next Shipment", "Edit Information" };
         
         tableModel = new DefaultTableModel(items, itemTraits);       
         
         JTable table = new JTable(tableModel) {
         	public boolean isCellEditable(int row, int column) {
-                return column == 4;   
+                return column == 5;   
             }
         };
         
-        
+     
+        table.setPreferredSize(new Dimension(1280, 720));
         
         ButtonRenderer buttonRenderer = new ButtonRenderer();
     	ButtonEditor buttonEditor = new ButtonEditor(new JTextField(), table);
         
-        table.getColumnModel().getColumn(4).setCellRenderer(buttonRenderer);
-        table.getColumnModel().getColumn(4).setCellEditor(buttonEditor);
+        table.getColumnModel().getColumn(5).setCellRenderer(buttonRenderer);
+        table.getColumnModel().getColumn(5).setCellEditor(buttonEditor);
         
         
-        JPanel cardPanel = new JPanel();
+        JPanel cardPanel = new JPanel(new BorderLayout());
+        JPanel infoPanel = new JPanel();
         
     	ImageIcon icon = new ImageIcon("Art/profile.png");
     	ImageIcon addIcon = new ImageIcon("art/plus.png");
@@ -62,9 +66,24 @@ public class Inventory {
     	JLabel searchHolder = new JLabel(searchIcon);
     	JLabel homeHolder = new JLabel(homeIcon);
     	
+    	JLabel name = new JLabel("Enter Item");
+    	infoPanel.add(name);
  
         JToolBar toolBar = AddToUI.createToolBar(); 
   
+        table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                if (!event.getValueIsAdjusting()) {
+                    int selectedRow = table.getSelectedRow();
+                    if (selectedRow != -1) {
+                        // Get information from the selected row and update the infoPanel
+                        String itemName = table.getValueAt(selectedRow, 1).toString();
+                        name.setText(itemName);
+                        // Add more labels or components to display other information as needed
+                    }
+                }
+            }
+        });
         
         
         
@@ -81,19 +100,22 @@ public class Inventory {
         toolBar.add(addIconHolder);
         toolBar.add(iconHolder);
         cardPanel.add(toolBar, BorderLayout.NORTH);
+        
 
+        
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(1200,640));
+        scrollPane.setPreferredSize(new Dimension(800,640));
+   
         
-        AddToUI.addComponent(cardPanel, scrollPane, 0, 0, 0, 0, 0, 0);
-        
+        cardPanel.add(scrollPane, BorderLayout.WEST);
+        cardPanel.add(infoPanel, BorderLayout.EAST);
  
         
           
         
         iconHolder.addMouseListener(new MouseAdapter() {	
-        	
         	public void mouseClicked(MouseEvent e) {
+        		
         		popupMenu.show(iconHolder, 0, iconHolder.getHeight());
         		
         	}
@@ -102,6 +124,7 @@ public class Inventory {
         addIconHolder.addMouseListener(new MouseAdapter() {
         	FileHandler handler = new FileHandler(table);
         	public void mouseClicked(MouseEvent e) {
+        		
         		AddToUI.newItemDialogue(table);
         		handler.InventoryToFile("files/inventorydatabase.txt");
         		
@@ -111,21 +134,28 @@ public class Inventory {
         
         logout.addActionListener(new ActionListener() {	        	
         	public void actionPerformed(ActionEvent e) {
+        		
         		Login.resetFields();
         		CardLayoutController.showLogin();
+        		
         	}
         });  
         
         AddUser.addActionListener(new ActionListener() {	
-        	
         	public void actionPerformed(ActionEvent e) {
         		
         		AccountManager.createAcc();	
-        	
-        	}
-        	
+        		
+        	}	
         });  
         
+        searchHolder.addMouseListener(new MouseAdapter() {
+        	public void mouseClicked(MouseEvent e) {
+        		AddToUI.searchItemDialogue(0, table);
+        	}
+        });   
+        
+      
         return cardPanel;
     }
 }

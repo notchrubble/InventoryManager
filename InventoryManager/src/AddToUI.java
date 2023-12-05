@@ -105,7 +105,7 @@ public class AddToUI {
           int option = JOptionPane.showConfirmDialog(null, message, "Add New Item", JOptionPane.OK_CANCEL_OPTION);
           if (option == JOptionPane.OK_OPTION) {
         	  DefaultTableModel model = (DefaultTableModel) table.getModel();
-              model.addRow(new Object[]{nameField.getText(), amountField.getText(), otherField.getText(), "", ""});
+              model.addRow(new Object[]{"",nameField.getText(), amountField.getText(), otherField.getText(), "",});
     
           }
           return table;
@@ -135,7 +135,25 @@ public class AddToUI {
             handler.InventoryToFile("files/inventorydatabase.txt");
         }
     }
-	
 
+	public static void searchItemDialogue(int row, JTable tableModel) {
+		
+		 JTextField nameField = new JTextField();
+		 
+		 Object[] message = {
+		            "Search for Item:", nameField,
+		         
+		        };
+		
+		 int option = JOptionPane.showConfirmDialog(null, message, "Search For Item", JOptionPane.OK_CANCEL_OPTION);
+	        if (option == JOptionPane.OK_OPTION) {
+	           
+	        	
+	        	
+	        	
+	        	
+	        	
+	        }
+	    }
 }
 	
