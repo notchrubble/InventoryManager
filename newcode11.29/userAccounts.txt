@@ -1,3 +1,0 @@
-user1:User1
-Admin:Admin123
-businessguy:123
