@@ -154,6 +154,15 @@ public class AddToUI {
 	        	
 	        	
 	        }
-	    }
+		}
+		public static void showDeleteDialog(int row, JTable tableModel) {
+		int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this item?", "Delete Item", JOptionPane.YES_NO_OPTION);
+		if (option == JOptionPane.YES_OPTION) {
+			DefaultTableModel model = (DefaultTableModel) tableModel.getModel();
+			model.removeRow(row);
+			FileHandler handler = new FileHandler(tableModel);
+			handler.InventoryToFile("files/inventorydatabase.txt");
+		}
+	}
 }
 	

@@ -10,10 +10,10 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.ImageIcon;
-
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
-
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -34,13 +34,13 @@ public class Inventory {
     	
     	
     	String[][]items = FileHandler.InventoryFromFile("files/inventorydatabase.txt");
-        String[] itemTraits = { "Item Number", "Item Name", "Quantity", "Description", "Next Shipment", "Edit Information" };
+        String[] itemTraits = { "Item Number", "Item Name", "Quantity", "Description", "Next Shipment", "Edit Information", "Delete Item" };
         
         tableModel = new DefaultTableModel(items, itemTraits);       
         
         JTable table = new JTable(tableModel) {
         	public boolean isCellEditable(int row, int column) {
-                return column == 5;   
+                return column == 5 || column == 6;   
             }
         };
         
@@ -49,9 +49,13 @@ public class Inventory {
         
         ButtonRenderer buttonRenderer = new ButtonRenderer();
     	ButtonEditor buttonEditor = new ButtonEditor(new JTextField(), table);
-        
+        ButtonRendererDelete buttonRendererDelete = new ButtonRendererDelete();
+    	ButtonDelete buttonDelete = new ButtonDelete(new JTextField(), table);
+
         table.getColumnModel().getColumn(5).setCellRenderer(buttonRenderer);
         table.getColumnModel().getColumn(5).setCellEditor(buttonEditor);
+        table.getColumnModel().getColumn(6).setCellRenderer(buttonRendererDelete);
+        table.getColumnModel().getColumn(6).setCellEditor(buttonDelete);
         
         
         JPanel cardPanel = new JPanel(new BorderLayout());
@@ -115,7 +119,9 @@ public class Inventory {
         JMenuItem logout = new JMenuItem("Logout");
         JMenuItem AddUser = new JMenuItem("Add User");
 
-        
+
+            
+            // Add the delete button to the toolbar
         popupMenu.add(logout);
         popupMenu.add(AddUser);
         toolBar.add(homeHolder);
