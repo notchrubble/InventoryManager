@@ -1,4 +1,33 @@
-MET1,Metal Rod,1000,Heavy metal rod,12-17-24
-URA2,Uranium-235,100,Most Commonly used in the Manhattan Project.,12-01-24
-BAR3,Barium-31,13,Another heavy metal element used in exotic engineering.,06-10-24
-HYP4,Hyperbolic time chamber,1,Gives you the ability to travel through time.,04-25-24
+URA1,Uranium-235,100,Most Commonly used in the Manhattan Project.,11-26-24
+BAR2,Barium-31,13,Another heavy metal element used in exotic engineering.,10-18-24
+HYP3,Hyperbolic time chamber,1,Gives you the ability to travel through time.,02-19-24
+ALU4,Aluminum Sheet,500,Thin and lightweight aluminum sheet.,09-18-24
+SUL5,Sulfur Powder,300,Fine sulfur powder for various applications.,02-12-24
+GOL6,Gold Ingot,50,Pure gold ingot for crafting valuable items.,09-16-24
+SIL7,Silicon Wafer,200,High-quality silicon wafer for electronics.,01-13-24
+COP8,Copper Coil,400,Copper coil for electrical applications.,11-16-24
+ZIN9,Zinc Alloy,150,Durable zinc alloy for industrial use.,01-29-24
+PLA10,Platinum Nugget,30,Rare platinum nugget with high value.,05-29-24
+NIC11,Nickel Bar,100,Solid nickel bar for manufacturing processes.,09-10-24
+MAG12,Magnesium Powder,250,Fine magnesium powder for scientific experiments.,04-09-24
+CHR13,Chromium Plate,80,Hard and corrosion-resistant chromium plate.,08-26-24
+TIT14,Titanium Rod,120,Sturdy titanium rod for aerospace applications.,03-26-24
+CER15,Ceramic Tile,300,Decorative and heat-resistant ceramic tile.,01-03-24
+RAD16,Radium-226,5,Radioactive element with various uses in research.,03-28-24
+TUN17,Tungsten Wire,60,Durable tungsten wire for specialized electronics.,12-22-24
+IRO18,Iron Ore,200,Raw iron ore for processing into iron.,12-18-24
+LIT19,Lithium Battery,50,Compact lithium battery for electronic devices.,06-07-24
+CAR20,Carbon Fiber Sheet,40,Lightweight and strong carbon fiber sheet.,10-03-24
+ARG21,Argon Gas,30,Pure argon gas for industrial applications.,04-08-24
+RAD22,Radium-228,8,Another radioactive element for scientific purposes.,08-20-24
+NIO23,Niobium Ingot,25,Hard and ductile niobium ingot for metallurgy.,07-10-24
+CHR24,Chrome Plating Kit,10,DIY chrome plating kit for hobbyists.,01-27-24
+CAL25,Calcium Powder,120,Fine calcium powder for nutritional supplements.,01-30-24
+TIN26,Tin Can,150,Common tin can for packaging various items.,06-15-24
+ZIR27,Zirconium Alloy,80,Durable zirconium alloy for advanced engineering.,01-10-24
+GER28,Germanium Crystal,15,High-purity germanium crystal for electronics.,07-24-24
+COB29,Cobalt Plate,70,Sturdy cobalt plate for industrial machinery.,08-21-24
+PLU30,Plutonium-239,3,Radioactive isotope with significant applications.,09-17-24
+CAL31,Californium-252,1,Rare and highly radioactive californium isotope.,03-11-24
+ALU32,Aluminum Alloy,90,Durable aluminum alloy for structural applications.,01-23-24
+NIT33,Nitrogen Gas,200,Pure nitrogen gas for various industrial uses.,04-07-24

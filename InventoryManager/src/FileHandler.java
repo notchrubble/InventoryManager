@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 import javax.swing.JTable;
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class FileHandler {
 	    public FileHandler(JTable table) {
 	        this.table = table;
 	    }
-	
+	    
 	    
 	    public static String[][] InventoryFromFile(String filePath) {
 	    	

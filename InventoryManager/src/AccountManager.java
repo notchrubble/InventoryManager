@@ -27,9 +27,11 @@ public class AccountManager{
 	//Creates an account by adding username as key and password as value inside of user_accs hashmap.
 	public static void addUser(String username, String password) {
 		user_accs.put(username, password);
+		FileHandlerAcc.writeUserAccounts("files/userAccounts.txt");
+		
 
 	}
-	
+	 
 	
 	
 	
@@ -90,7 +92,9 @@ public class AccountManager{
                 String password = new String(pchar);
                 AccountManager.addUser(username, password);
                 AccountManager.display();
+                FileHandlerAcc.writeUserAccounts(password);
                 inputFrame.dispose();
+                
             }
         });
 
