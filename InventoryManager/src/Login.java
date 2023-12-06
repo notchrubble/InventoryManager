@@ -4,10 +4,9 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
-
-
-//This class extends AccountManager, so that this class may inherit the values and methods of AccountManager class.
 
 public class Login extends AccountManager{
 	
@@ -33,28 +32,37 @@ public class Login extends AccountManager{
         b.addMouseListener(new MouseAdapter() {							//Assigns a mouse listener to login button making it clickable.
         	
         	public void mouseClicked(MouseEvent e) {
-        		String usernameInput = username.getText();				//Once Login button is clicked, save username entered into a String variable.
-        		char[]pchar = password.getPassword();					//Once Login button is clicked, save password entered into a array of characters.
-        		String passwordInput = new String(pchar);				//Convert array of characters into string to save password entered.
-        		
-        		if (AccountManager.isValid(usernameInput, passwordInput)) {			//Passes username and password through boolean method to verify if Admin.
-   
-        			CardLayoutController.showInven();
-     
-        		}        		
+        		login();
         	}
         }); 
+        
+        password.addKeyListener(new KeyAdapter() {						//Adds key listener to password field
+        	
+        	public void keyPressed(KeyEvent e) {
+        		if (e.getKeyCode() == KeyEvent.VK_ENTER) {				//Checks if the enter key is pressed
+        			login();
+        		}
+        	}
+        });
+        
         cardPanel.add(imagePanel, BorderLayout.EAST);
         cardPanel.add(panel, BorderLayout.WEST);
        
         return cardPanel;
 	}
 	
+	private void login() {
+		String usernameInput = username.getText();				//Once Login button is clicked, save username entered into a String variable.
+		char[]pchar = password.getPassword();					//Once Login button is clicked, save password entered into a array of characters.
+		String passwordInput = new String(pchar);				//Convert array of characters into string to save password entered.
+		
+		if (AccountManager.isValid(usernameInput, passwordInput)) {			//Passes username and password through boolean method to verify if Admin.
+			CardLayoutController.showInven();
+		}        		
+	}
 	
 	public static void resetFields() {
 		username.setText("");
 		password.setText("");
 	}
-	
-	
 }
