@@ -140,25 +140,37 @@ public class AddToUI {
         }
     }
 
-	public static void searchItemDialogue(int row, JTable tableModel) {
-		
-		 JTextField nameField = new JTextField();
-		 
-		 Object[] message = {
-		            "Search for Item:", nameField,
-		         
-		        };
-		
-		 int option = JOptionPane.showConfirmDialog(null, message, "Search For Item", JOptionPane.OK_CANCEL_OPTION);
-	        if (option == JOptionPane.OK_OPTION) {
-	           
-	        	
-	        	
-	        	
-	        	
-	        	
+	public static void searchItemDialogue(int row, JTable table) {
+	    JTextField nameField = new JTextField();
+
+	    Object[] message = {
+	            "Search for Item:", nameField,
+	    };
+
+	    int option = JOptionPane.showConfirmDialog(null, message, "Search For Item", JOptionPane.OK_CANCEL_OPTION);
+	    if (option == JOptionPane.OK_OPTION) {
+	        String itemNameToSearch = nameField.getText().toUpperCase();
+	        DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+	        boolean itemFound = false;
+	        for (int rowIndex = 0; rowIndex < model.getRowCount(); rowIndex++) {
+	            String itemNameInTable = model.getValueAt(rowIndex, 1).toString().toUpperCase();
+
+	            if (itemNameInTable.equals(itemNameToSearch)) {
+	                // Highlight the row and column
+	                table.setRowSelectionInterval(rowIndex, rowIndex);
+	                table.setColumnSelectionInterval(0, model.getColumnCount() - 1);
+	                itemFound = true;
+	                break;  // Stop searching once the item is found
+	            }
 	        }
-		}
+
+	        if (!itemFound) {
+	            JOptionPane.showMessageDialog(null, "Item not found in the table.", "Not Found", JOptionPane.INFORMATION_MESSAGE);
+	        }
+	    }
+	}
+
 	
 	public static JPanel createBlackBoxPanel(JLabel label) {
         JPanel panel = new JPanel();

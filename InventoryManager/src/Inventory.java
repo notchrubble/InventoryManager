@@ -221,7 +221,7 @@ public class Inventory {
         
         searchIconHolder.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent e) {
-        		AddToUI.searchItemDialogue(0, table);
+        		AddToUI.searchItemDialogue(1, table);
         	}
         });   
         
