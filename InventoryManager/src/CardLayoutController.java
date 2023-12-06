@@ -49,8 +49,8 @@ public class CardLayoutController {
 		
 	}
 	public static void showInven() {
-		
-		frame.setResizable(false);
+	
+	
 		frame.setTitle("Inventory Homepage");
 		
 		cardLayout.show(cardPanel, "Inventory");

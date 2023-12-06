@@ -26,7 +26,6 @@ public class Login extends AccountManager{
 		username = AddToUI.userText(panel, 1, 0, 10, 0, 0, 80);			//Creates JTextField using a Builder Design Pattern Method.
 		password = AddToUI.userPass(panel, 1, 1, 10, 0, 0, 80);		//Creates component using AddToUI method
 		JButton b = AddToUI.button(panel, "Login", 1, 3, 10, 0, -100, 80);			//Passes through values for x and y, top, left, bottom, and right padding.
-	
 		AddToUI.imageLabel(imagePanel, image, 0, 0, 10, 40, 0, 0);
         AddToUI.label(panel, "Username", 0, 0, 10, 40, 0, 0);			//Creates username label
 		AddToUI.label(panel, "Password", 0, 1, 10, 40, 0, 0);			//Creates password label.
