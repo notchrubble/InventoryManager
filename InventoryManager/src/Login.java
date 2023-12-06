@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,11 +17,14 @@ public class Login extends AccountManager{
 	public JPanel showLandingPage(){
 		
 
-		ImageIcon image = new ImageIcon("Art/cart.jpg");
+		ImageIcon image = new ImageIcon("Art/loginart.png");
 		JPanel imagePanel = new JPanel();
+		
 		JPanel cardPanel = new JPanel(new BorderLayout());
 		JPanel panel = new JPanel(new GridBagLayout());
-		panel.setBackground(Color.gray);
+		panel.setBackground(new Color(224,224,224));
+		
+		imagePanel.setPreferredSize(new Dimension(900, 720));
 		
 		username = AddToUI.userText(panel, 1, 0, 10, 0, 0, 80);			//Creates JTextField using a Builder Design Pattern Method.
 		password = AddToUI.userPass(panel, 1, 1, 10, 0, 0, 80);		//Creates component using AddToUI method
