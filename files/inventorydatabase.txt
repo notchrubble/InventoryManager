@@ -1,5 +1,4 @@
-MET1,Metal Rod,100,Heavy metal rod,05-21-24
-TES2,test,11,asd,05-30-24
-TES3,test,100,adasd,07-27-24
-BRO4,bro plase,123,asdasd,08-11-24
-TES5,test,123,asdasd,04-23-24
+MET1,Metal Rod,1000,Heavy metal rod,12-17-24
+URA2,Uranium-235,100,Most Commonly used in the Manhattan Project.,12-01-24
+BAR3,Barium-31,13,Another heavy metal element used in exotic engineering.,06-10-24
+HYP4,Hyperbolic time chamber,1,Gives you the ability to travel through time.,04-25-24

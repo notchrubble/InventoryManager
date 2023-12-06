@@ -112,25 +112,29 @@ public class AddToUI {
       }
 	
 	public static void showEditDialog(int row, JTable tableModel) {
-        String itemName = (String) tableModel.getValueAt(row, 0);
-        String itemAmount = (String) tableModel.getValueAt(row, 1);
-        String itemOther = (String) tableModel.getValueAt(row, 2);
+        String itemName = (String) tableModel.getValueAt(row, 1);
+        String itemAmount = (String) tableModel.getValueAt(row, 2);
+        String itemOther = (String) tableModel.getValueAt(row, 3);
+        String itemDate = (String) tableModel.getValueAt(row, 4);
 
         JTextField nameField = new JTextField(itemName);
         JTextField amountField = new JTextField(itemAmount);
         JTextField otherField = new JTextField(itemOther);
+        JTextField dateField = new JTextField(itemDate);
 
         Object[] message = {
             "New Item Name:", nameField,
             "New Quantity", amountField,
-            "New Description", otherField
+            "New Description", otherField,
+            "New Item Date", dateField
         };
 
         int option = JOptionPane.showConfirmDialog(null, message, "Edit Item", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
-            tableModel.setValueAt(nameField.getText(), row, 0);
-            tableModel.setValueAt(amountField.getText(), row, 1);
-            tableModel.setValueAt(otherField.getText(), row, 2);
+            tableModel.setValueAt(nameField.getText(), row, 1);
+            tableModel.setValueAt(amountField.getText(), row, 2);
+            tableModel.setValueAt(otherField.getText(), row, 3);
+            tableModel.setValueAt(otherField.getText(), row, 4);
             FileHandler handler = new FileHandler(tableModel);
             handler.InventoryToFile("files/inventorydatabase.txt");
         }
@@ -155,6 +159,27 @@ public class AddToUI {
 	        	
 	        }
 		}
+	
+	public static JPanel createBlackBoxPanel(JLabel label) {
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(125,125,125));
+        panel.add(label);
+        return panel;
+    }
+	
+	public static void addToInfoPanel(JPanel infoPanel, JPanel panel, int x, int y, int top, int left, int bottom, int right) {        
+        GridBagConstraints gbc = new GridBagConstraints();
+        
+        gbc.gridx = x;
+        gbc.gridy = y;
+        gbc.insets = new Insets(top, left, bottom, right);
+
+ 
+
+        infoPanel.add(panel, gbc);
+
+    }
+	
 		public static void showDeleteDialog(int row, JTable tableModel) {
 		int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this item?", "Delete Item", JOptionPane.YES_NO_OPTION);
 		if (option == JOptionPane.YES_OPTION) {

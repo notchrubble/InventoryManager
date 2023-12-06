@@ -60,53 +60,105 @@ public class Inventory {
         
         JPanel cardPanel = new JPanel(new BorderLayout());
         JPanel infoPanel = new JPanel();
-     
-        infoPanel.setBackground(new Color(155,155,155));
+        infoPanel.setVisible(false);
+        infoPanel.setBackground(new Color(155, 155, 155));
         
-    	ImageIcon icon = new ImageIcon("Art/profile.png");
-    	ImageIcon addIcon = new ImageIcon("art/plus.png");
-    	ImageIcon searchIcon = new ImageIcon("art/search.png");
-    	ImageIcon homeIcon = new ImageIcon("art/icons8-home-40.png");
+        JScrollPane scrollPane = new JScrollPane(table);
+    
+        scrollPane.setPreferredSize(new Dimension(1280,640));
+        
+        ImageIcon profileIcon = new ImageIcon("Art/profile.png");
+    	ImageIcon addItemIcon = new ImageIcon("art/plus.png");
+    	ImageIcon searchItemIcon = new ImageIcon("art/search.png");
+    	JLabel profileIconHolder = new JLabel(profileIcon);
+    	JLabel addIconHolder = new JLabel(addItemIcon);
+    	JLabel searchIconHolder = new JLabel(searchItemIcon);
     	
     	
-    	JLabel iconHolder = new JLabel(icon);
-    	JLabel addIconHolder = new JLabel(addIcon);
-    	JLabel searchHolder = new JLabel(searchIcon);
-    	JLabel homeHolder = new JLabel(homeIcon);
-    	
+    	Font font = new Font("Work Sans", Font.BOLD, 24);
     	JLabel name = new JLabel();
     	JLabel quantity = new JLabel();
     	JLabel shipmentDate = new JLabel();
+    	JLabel desc = new JLabel();
     	
-    	infoPanel.add(name);
-    	//infoPanel.add(quantity);
-    	//infoPanel.add(shipmentDate);
- 
+    	JLabel quantityGUIText = new JLabel("Items in Stock:");
+    	JLabel shipmentDateGUIText = new JLabel("Next Expected Shipment Date:");
+    	JLabel descGUIText = new JLabel("Item Description:");
+    	
+   
+    	
+    	name.setFont(font);
+        name.setForeground(new Color(55,55,55));
+        quantity.setForeground(Color.red);
+        shipmentDate.setForeground(Color.green);
+    	
+        
+        JPanel quantityTextPanel = AddToUI.createBlackBoxPanel(quantityGUIText);
+        JPanel dateTextPanel = AddToUI.createBlackBoxPanel(shipmentDateGUIText);
+        JPanel descTextPanel = AddToUI.createBlackBoxPanel(descGUIText);
+        
+    	JPanel namePanel = AddToUI.createBlackBoxPanel(name);
+        JPanel quantityPanel = AddToUI.createBlackBoxPanel(quantity);
+        JPanel shipmentDatePanel = AddToUI.createBlackBoxPanel(shipmentDate);
+        JPanel itemDescPanel = AddToUI.createBlackBoxPanel(desc);
+        
         JToolBar toolBar = AddToUI.createToolBar(); 
-  
-        
-        Font font = new Font("Arial", Font.BOLD, 24);
-        name.setFont(font);
-        name.setForeground(Color.white);
-        
+        toolBar.add(searchIconHolder);
+        toolBar.add(Box.createHorizontalStrut(1150));
+        toolBar.add(addIconHolder);
+        toolBar.add(profileIconHolder);
+     
+        JPopupMenu popupMenu = AddToUI.popMenu();
+        JMenuItem logoutButton = new JMenuItem("Logout");
+        JMenuItem AddUserButton = new JMenuItem("Add User");
+        popupMenu.add(logoutButton);
+        popupMenu.add(AddUserButton);
         
         
         
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent event) {
+            	 infoPanel.setPreferredSize(new Dimension(cardPanel.getWidth()-800, cardPanel.getHeight()));
+                 infoPanel.removeAll(); // Remove existing components before adding new ones
+                 infoPanel.setLayout(new GridBagLayout());
+                 
+                 AddToUI.addToInfoPanel(infoPanel, quantityTextPanel, 0, 0, -300, -365, 0, 0);
+                 AddToUI.addToInfoPanel(infoPanel, quantityPanel, 0, 0, -300, -235, 0, 0);
+                 
+                 AddToUI.addToInfoPanel(infoPanel, dateTextPanel, 0, 0, -250, -268, 0, 0);
+                 AddToUI.addToInfoPanel(infoPanel, shipmentDatePanel, 0, 0, -250, -5, 0, 0);
+                 
+                 
+                 
+                 AddToUI.addToInfoPanel(infoPanel, descTextPanel, 0, 0, 0, 0, 0, 0);
+                 AddToUI.addToInfoPanel(infoPanel, itemDescPanel, 0, 0, 50, 0, 0, 0);
+                 
+                 
+                 AddToUI.addToInfoPanel(infoPanel, namePanel, 0, 0, -600, -0, 0, 0);
+             
+                 infoPanel.revalidate(); // Revalidate the panel to reflect changes
+                 infoPanel.repaint();
+                 
+                 scrollPane.setPreferredSize(new Dimension(800,640));
+                 infoPanel.setVisible(true);
+  
+                 cardPanel.add(infoPanel);
+             
                 if (!event.getValueIsAdjusting()) {
                     int selectedRow = table.getSelectedRow();
                     if (selectedRow != -1) {
-         
-                        String itemName = table.getValueAt(selectedRow, 1).toString();
+                    
+                        String itemName = table.getValueAt(selectedRow, 1).toString().toUpperCase();
                         String itemQuantity = table.getValueAt(selectedRow, 2).toString();
-                        String itemDate = table.getValueAt(selectedRow, 4).toString();
-                        
-                        
+                        String itemDesc = table.getValueAt(selectedRow, 3).toString();
+                        String itemDate = table.getValueAt(selectedRow, 4).toString(); 
+                             
                         name.setText(itemName);
-                      
                         quantity.setText(itemQuantity);
                         shipmentDate.setText(itemDate);
+                        desc.setText(itemDesc);
+              
+                  
                         
                     }
                 }
@@ -115,39 +167,26 @@ public class Inventory {
         
         
         
-        JPopupMenu popupMenu = AddToUI.popMenu();
-        JMenuItem logout = new JMenuItem("Logout");
-        JMenuItem AddUser = new JMenuItem("Add User");
 
 
             
             // Add the delete button to the toolbar
-        popupMenu.add(logout);
-        popupMenu.add(AddUser);
-        toolBar.add(homeHolder);
-        toolBar.add(searchHolder);
-        toolBar.add(Box.createHorizontalStrut(1105));
-        toolBar.add(addIconHolder);
-        toolBar.add(iconHolder);
+      
+     
+     
+     
         cardPanel.add(toolBar, BorderLayout.NORTH);
         
-
-        
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setPreferredSize(new Dimension(800,640));
-   
-        infoPanel.setPreferredSize(new Dimension(cardPanel.getWidth()-scrollPane.getWidth(), cardPanel.getHeight()));
-        
         cardPanel.add(scrollPane, BorderLayout.WEST);
-        cardPanel.add(infoPanel);
+       
  
         
           
         
-        iconHolder.addMouseListener(new MouseAdapter() {	
+        profileIconHolder.addMouseListener(new MouseAdapter() {	
         	public void mouseClicked(MouseEvent e) {
         		
-        		popupMenu.show(iconHolder, 0, iconHolder.getHeight());
+        		popupMenu.show(profileIconHolder, 0, profileIconHolder.getHeight());
         		
         	}
         }); 
@@ -163,7 +202,7 @@ public class Inventory {
         });   
         
         
-        logout.addActionListener(new ActionListener() {	        	
+        logoutButton.addActionListener(new ActionListener() {	        	
         	public void actionPerformed(ActionEvent e) {
         		
         		Login.resetFields();
@@ -172,7 +211,7 @@ public class Inventory {
         	}
         });  
         
-        AddUser.addActionListener(new ActionListener() {	
+        AddUserButton.addActionListener(new ActionListener() {	
         	public void actionPerformed(ActionEvent e) {
         		
         		AccountManager.createAcc();	
@@ -180,7 +219,7 @@ public class Inventory {
         	}	
         });  
         
-        searchHolder.addMouseListener(new MouseAdapter() {
+        searchIconHolder.addMouseListener(new MouseAdapter() {
         	public void mouseClicked(MouseEvent e) {
         		AddToUI.searchItemDialogue(0, table);
         	}
