@@ -199,6 +199,15 @@ public class Inventory {
         		handler.InventoryToFile("files/inventorydatabase.txt");
         		tableModel.setDataVector(FileHandler.InventoryFromFile("files/inventorydatabase.txt"), itemTraits);
         		tableModel.fireTableDataChanged();
+        		ButtonRenderer buttonRenderer = new ButtonRenderer();
+                ButtonEditor buttonEditor = new ButtonEditor(new JTextField(), table);
+                ButtonRendererDelete buttonRendererDelete = new ButtonRendererDelete();
+                ButtonDelete buttonDelete = new ButtonDelete(new JTextField(), table);
+                table.getColumnModel().getColumn(5).setCellRenderer(buttonRenderer);
+                table.getColumnModel().getColumn(5).setCellEditor(buttonEditor);
+                table.getColumnModel().getColumn(6).setCellRenderer(buttonRendererDelete);
+                table.getColumnModel().getColumn(6).setCellEditor(buttonDelete);
+
         	}
         });   
         
