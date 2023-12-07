@@ -197,7 +197,8 @@ public class Inventory {
         		
         		AddToUI.newItemDialogue(table);
         		handler.InventoryToFile("files/inventorydatabase.txt");
-        		
+        		tableModel.setDataVector(FileHandler.InventoryFromFile("files/inventorydatabase.txt"), itemTraits);
+        		tableModel.fireTableDataChanged();
         	}
         });   
         

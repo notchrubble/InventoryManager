@@ -99,7 +99,7 @@ public class AddToUI {
           Object[] message = {
               "Enter Item Name:", nameField,
               "Enter Item Amount:", amountField,
-              "Enter Item Description:", otherField
+              "Enter Item Description:", otherField,
           };
   
           int option = JOptionPane.showConfirmDialog(null, message, "Add New Item", JOptionPane.OK_CANCEL_OPTION);
@@ -134,7 +134,7 @@ public class AddToUI {
             tableModel.setValueAt(nameField.getText(), row, 1);
             tableModel.setValueAt(amountField.getText(), row, 2);
             tableModel.setValueAt(otherField.getText(), row, 3);
-            tableModel.setValueAt(otherField.getText(), row, 4);
+            tableModel.setValueAt(dateField.getText(), row, 4);
             FileHandler handler = new FileHandler(tableModel);
             handler.InventoryToFile("files/inventorydatabase.txt");
         }

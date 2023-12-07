@@ -66,7 +66,7 @@ public class FileHandler {
 	            	String rawText = table.getValueAt(i, 1).toString();
 	            	rawText = rawText.toUpperCase();
 	            	
-	                bw.write(rawText.substring(0, 3) + counterInt + "," + table.getValueAt(i, 1) + "," + table.getValueAt(i, 2) + "," + table.getValueAt(i, 3) + "," + randomDate.format(formatter));
+	                bw.write(rawText.substring(0, 2) + counterInt + "," + table.getValueAt(i, 1) + "," + table.getValueAt(i, 2) + "," + table.getValueAt(i, 3) + "," + randomDate.format(formatter));
 	                bw.newLine();
 	                counterInt++;
 	            }
